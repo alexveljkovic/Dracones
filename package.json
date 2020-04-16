@@ -1,0 +1,33 @@
+{
+  "name": "dracones",
+  "version": "1.0.0",
+  "description": "D20 RPG engine",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexveljkovic/Dracones.git"
+  },
+  "dependencies": {
+    "@hapi/joi": "^17.1.1",
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.0.0",
+    "eslint-plugin-import": "^2.20.1",
+    "mocha": "^7.1.1"
+  },
+  "keywords": [
+    "D20",
+    "RPG",
+    "dnd",
+    "engine"
+  ],
+  "author": "Aleksandar Veljković",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/alexveljkovic/Dracones/issues"
+  },
+  "homepage": "https://github.com/alexveljkovic/Dracones#readme"
+}
