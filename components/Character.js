@@ -34,19 +34,10 @@ class Character {
   }
 
   processStats(characterStats, availableStats) {
-    Object.keys(characterStats).forEach((statName) => {
-      const stat = availableStats.find((el) => el.name === statName);
-
-      if (stat == null) {
-        throw Error(`Unknown stat ${statName}`);
+    availableStats.forEach((stat) => {
+      if (stat.type !== 'Operator') {
+        stat.applyToCharacter(this, characterStats[stat.name]);
       }
-
-      const statValue = characterStats[statName];
-      if (Number.isNaN(statValue)) {
-        throw Error(`Invalid value ${statValue} for stat ${statName}`);
-      }
-
-      stat.applyToCharacter(this, statValue);
     });
   }
 
@@ -105,9 +96,16 @@ class Character {
   getAllStats() {
     const statsObj = {};
     Object.keys(this._stats).forEach((statName) => {
-      statsObj[statName] = {
+      const { group } = this._stats[statName].stat;
+
+      if (statsObj[group] == null) {
+        statsObj[group] = {};
+      }
+
+      statsObj[group][statName] = {
         value: this.getStatValue(statName),
-        modifier: this.getStatModifier(statName),
+        modifier: this.getStatModifier(statName) || undefined,
+        type: this._stats[statName].stat.type,
       };
     });
     return statsObj;

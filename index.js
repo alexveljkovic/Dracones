@@ -7,6 +7,8 @@ try {
     stats: {
       strength: 13,
       dexterity: 7,
+      constitution: 14,
+      dice: 8,
     },
   };
 
@@ -20,8 +22,11 @@ try {
   character.setStatValue('strength', 17);
   // console.log(character.getAllStats());
   // console.log(character.getStatModifier('strength'));
-  console.log(character.getCharacterSheet());
-  // console.log(dice.d20.name);
+  console.log(JSON.stringify(character.getCharacterSheet(), null, 2));
+  console.log(dice.d20.name);
+  console.log(dice.d20.roll());
+
+  console.log('Strength check: ', dice.d20.roll() + character.getStatModifier('strength'));
 } catch (err) {
   console.log(err);
 }

@@ -1,6 +1,5 @@
 const Joi = require('@hapi/joi');
 const utils = require('./Utils');
-const StatOperator = require('./StatOperator');
 
 // ----- Schemas -----
 /**
@@ -17,6 +16,8 @@ const modifiersSchema = Joi.object().keys({
 const statSchema = Joi.object().keys({
   name: Joi.string().required().trim().error(() => new Error('Missing or invalid stat name')),
   modifiers: Joi.array().items(modifiersSchema).required().error(() => Error()),
+  baseValue: Joi.optional(),
+  group: Joi.string().optional().error(() => new Error('Invalid stat category')),
 });
 // ----- End of schemas -----
 
@@ -26,6 +27,14 @@ class BaseStat {
     utils.validateObject(statSchema, statData);
 
     Object.assign(this, utils.prefixFields(statData, '_'));
+  }
+
+  get type() {
+    return 'BaseStat';
+  }
+
+  get group() {
+    return this._group;
   }
 
   value(character) {
@@ -48,10 +57,10 @@ class BaseStat {
     }
   }
 
-  applyToCharacter(character, baseValue = 0) {
+  applyToCharacter(character, baseValue) {
     // eslint-disable-next-line no-param-reassign
     character._stats[this.name] = {
-      baseValue,
+      baseValue: baseValue || this._baseValue || 0,
       stat: this,
       influences: [],
     };
