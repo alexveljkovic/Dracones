@@ -1,0 +1,8 @@
+Stats:
+> Strength
+> Constitution; default: 0
+> Level; default: 1
+> Dexterity; default: 0
+> Dice; default: 8
+> HP;formula: Dice * Level + modifier(Constitution)
+> Damage; default: 1

@@ -41,7 +41,12 @@ class BaseStat {
     if (character._stats[this.name].baseValue != null) {
       return character._stats[this.name].baseValue
         + character._stats[this.name].influences.reduce(
-          (total, current) => (total + current.value),
+          (total, current) => {
+            if (!current.equipmentRequired || character.hasEquiped(current.itemInstanceId)) {
+              return (total + current.value);
+            }
+            return total;
+          },
           0,
         );
     }

@@ -30,7 +30,12 @@ class Character {
     this.processStats(processedCharacterData.stats, availableStats);
     delete processedCharacterData.stats;
 
+    // Assign character data
     Object.assign(this, utils.prefixFields(processedCharacterData, '_'));
+
+    // Initialize empty inventory
+    this._inventory = [];
+    this._equipedItems = [];
   }
 
   processStats(characterStats, availableStats) {
@@ -97,12 +102,13 @@ class Character {
     const statsObj = {};
     Object.keys(this._stats).forEach((statName) => {
       const { group } = this._stats[statName].stat;
+      const groupName = group || 'default'
 
-      if (statsObj[group] == null) {
-        statsObj[group] = {};
+      if (statsObj[groupName] == null) {
+        statsObj[groupName] = {};
       }
 
-      statsObj[group][statName] = {
+      statsObj[groupName][statName] = {
         value: this.getStatValue(statName),
         modifier: this.getStatModifier(statName) || undefined,
         type: this._stats[statName].stat.type,
@@ -116,6 +122,45 @@ class Character {
       name: this.name,
       stats: this.getAllStats(),
     };
+  }
+
+  addToInventory(itemInstance) {
+    const { id } = itemInstance;
+
+    itemInstance.info.influences.forEach((influence) => {
+      const { stat, value, equipmentRequired} = influence;
+      if (this._stats[stat] == null) {
+        throw Error(`Invald item influence stat: ${stat}`);
+      }
+
+      this._stats[stat].influences.push({ itemInstanceId: id, value, equipmentRequired });
+    });
+
+    this._inventory.push(itemInstance);
+  }
+
+  removeFromInventory(itemInstanceId) {
+    this._inventory = this._inventory.filter((it) => it.id !== itemInstanceId);
+    Object.keys(this._stats).forEach((stat) => {
+      this._stats[stat].influences = this._stats[stat]
+        .influences.filter((influence) => influence.itemInstanceId !== itemInstanceId);
+    });
+  }
+
+  equipItem(itemInstanceId) {
+    // Check if item is already equipped
+    if (this._equipedItems.find(itemInstanceId) == null) {
+      this._equipedItems.push(itemInstanceId);
+    }
+  }
+
+  unequipItem(itemInstanceId) {
+    this._equipedItems = this._equipedItems.filter((it) => it !== itemInstanceId);
+  }
+
+  hasEquiped(itemInstanceId) {
+    const itemInstance = this._equipedItems.find((it) => it === itemInstanceId);
+    return itemInstance != null;
   }
 }
 

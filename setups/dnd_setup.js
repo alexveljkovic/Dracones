@@ -5,72 +5,76 @@ const StatOperator = require('../components/StatOperator');
 const ConstantStat = require('../components/ConstantStat');
 const Stat = require('../components/Stat');
 
-const strengthStat = new BaseStat({
-  name: 'strength',
-  modifiers: utils.constants.DND_MODIFIERS,
-  group: 'Stats',
-});
+const availableStats = require('../loaders/StatLoader');
+// console.log(availableStats);
 
-const dexterityStat = new BaseStat({
-  name: 'dexterity',
-  modifiers: utils.constants.DND_MODIFIERS,
-  group: 'Stats',
-});
-
-const constitutionStat = new BaseStat({
-  name: 'constitution',
-  modifiers: utils.constants.DND_MODIFIERS,
-  group: 'Stats',
-});
-
-const diceStat = new ConstantStat({
-  name: 'dice',
-  group: 'General',
-});
-
-const levelStat = new BaseStat({
-  name: 'level',
-  baseValue: 1,
-  modifiers: [],
-  group: 'General',
-});
-
-const healthStat = new Stat({
-  name: 'health',
-  group: 'General',
-  dependencies: [
-
-    new StatOperator({
-      opcode: '+',
-      dependencies: [
-
-        new StatOperator({
-          opcode: 'MODIFIER',
-          dependencies: [
-            constitutionStat,
-          ],
-        }),
-
-        new StatOperator({
-          opcode: '*',
-          dependencies: [
-            levelStat,
-            diceStat,
-          ],
-        }),
-      ],
-    }),
-  ],
-});
-
-const availableStats = [
-  strengthStat,
-  dexterityStat,
-  constitutionStat,
-  levelStat,
-  diceStat,
-  healthStat,
-];
+//
+// const strengthStat = new BaseStat({
+//   name: 'strength',
+//   modifiers: utils.constants.DND_MODIFIERS,
+//   group: 'Stats',
+// });
+//
+// const dexterityStat = new BaseStat({
+//   name: 'dexterity',
+//   modifiers: utils.constants.DND_MODIFIERS,
+//   group: 'Stats',
+// });
+//
+// const constitutionStat = new BaseStat({
+//   name: 'constitution',
+//   modifiers: utils.constants.DND_MODIFIERS,
+//   group: 'Stats',
+// });
+//
+// const diceStat = new ConstantStat({
+//   name: 'dice',
+//   group: 'General',
+// });
+//
+// const levelStat = new BaseStat({
+//   name: 'level',
+//   baseValue: 1,
+//   modifiers: [],
+//   group: 'General',
+// });
+//
+// const healthStat = new Stat({
+//   name: 'health',
+//   group: 'General',
+//   dependencies: [
+//
+//     new StatOperator({
+//       opcode: '+',
+//       dependencies: [
+//
+//         new StatOperator({
+//           opcode: 'MODIFIER',
+//           dependencies: [
+//             constitutionStat,
+//           ],
+//         }),
+//
+//         new StatOperator({
+//           opcode: '*',
+//           dependencies: [
+//             levelStat,
+//             diceStat,
+//           ],
+//         }),
+//       ],
+//     }),
+//   ],
+// });
+//
+// const availableStats = [
+//   strengthStat,
+//   dexterityStat,
+//   constitutionStat,
+//   levelStat,
+//   diceStat,
+//   healthStat,
+// ];
 
 module.exports = {
   dice: {
