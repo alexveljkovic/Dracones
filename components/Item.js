@@ -14,6 +14,9 @@ const itemSchema = Joi.object().keys({
   influences: Joi.array().required().error(() => new Error('Missing or invalid item influences')),
   level: Joi.number().required().error(() => new Error('Missing or invalid item level')),
   equipable: Joi.bool().optional().error(() => new Error('Invalid item equipable flag')),
+  numSlots: Joi.number().required().error(() => new Error('Missing or invalid item number of slots')),
+  size: Joi.number().required().error(() => new Error('Missing or invalid item size')),
+  capacity: Joi.number().optional().error(() => new Error('Invalid capacity')),
 });
 // ----- End of schemas -----
 

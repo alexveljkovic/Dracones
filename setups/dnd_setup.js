@@ -5,7 +5,7 @@ const StatOperator = require('../components/StatOperator');
 const ConstantStat = require('../components/ConstantStat');
 const Stat = require('../components/Stat');
 
-const availableStats = require('../loaders/StatLoader');
+const availableStats = require('../loaders/StatLoader')(utils.constants.modifiers.DND_MODIFIERS);
 // console.log(availableStats);
 
 //

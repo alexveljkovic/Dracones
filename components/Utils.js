@@ -1,71 +1,73 @@
 module.exports = {
   constants: {
-    DND_MODIFIERS: [
-      {
-        threshold: 1,
-        modifier: -5,
-      },
-      {
-        threshold: 2,
-        modifier: -4,
-      },
-      {
-        threshold: 4,
-        modifier: -3,
-      },
-      {
-        threshold: 6,
-        modifier: -2,
-      },
-      {
-        threshold: 8,
-        modifier: -1,
-      },
-      {
-        threshold: 10,
-        modifier: 0,
-      },
-      {
-        threshold: 12,
-        modifier: 1,
-      },
-      {
-        threshold: 14,
-        modifier: 2,
-      },
-      {
-        threshold: 16,
-        modifier: 3,
-      },
-      {
-        threshold: 18,
-        modifier: 4,
-      },
-      {
-        threshold: 20,
-        modifier: 5,
-      },
-      {
-        threshold: 22,
-        modifier: 6,
-      },
-      {
-        threshold: 24,
-        modifier: 7,
-      },
-      {
-        threshold: 26,
-        modifier: 8,
-      },
-      {
-        threshold: 28,
-        modifier: 9,
-      },
-      {
-        threshold: 30,
-        modifier: 10,
-      },
-    ],
+    modifiers: {
+      DND_MODIFIERS: [
+        {
+          threshold: 1,
+          modifier: -5,
+        },
+        {
+          threshold: 2,
+          modifier: -4,
+        },
+        {
+          threshold: 4,
+          modifier: -3,
+        },
+        {
+          threshold: 6,
+          modifier: -2,
+        },
+        {
+          threshold: 8,
+          modifier: -1,
+        },
+        {
+          threshold: 10,
+          modifier: 0,
+        },
+        {
+          threshold: 12,
+          modifier: 1,
+        },
+        {
+          threshold: 14,
+          modifier: 2,
+        },
+        {
+          threshold: 16,
+          modifier: 3,
+        },
+        {
+          threshold: 18,
+          modifier: 4,
+        },
+        {
+          threshold: 20,
+          modifier: 5,
+        },
+        {
+          threshold: 22,
+          modifier: 6,
+        },
+        {
+          threshold: 24,
+          modifier: 7,
+        },
+        {
+          threshold: 26,
+          modifier: 8,
+        },
+        {
+          threshold: 28,
+          modifier: 9,
+        },
+        {
+          threshold: 30,
+          modifier: 10,
+        },
+      ],
+    },
   },
 
   /**

@@ -1,6 +1,6 @@
+const Joi = require('@hapi/joi');
 const BaseStat = require('./BaseStat');
 const StatOperator = require('./StatOperator');
-const Joi = require('@hapi/joi');
 const utils = require('./Utils');
 
 /**
@@ -40,12 +40,17 @@ class Stat {
     return this._name;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   getModifier() {
     return null;
   }
 
   value(character) {
-    return this._dependencies.reduce((total, current) => (total + current.value(character)), 0);
+    return this._dependencies.reduce(
+      (total, current) => (total + current.value(character)
+      ),
+      0,
+    ) + character.getStatInfluences(this.name);
   }
 }
 

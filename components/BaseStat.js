@@ -29,6 +29,7 @@ class BaseStat {
     Object.assign(this, utils.prefixFields(statData, '_'));
   }
 
+  // eslint-disable-next-line class-methods-use-this
   get type() {
     return 'BaseStat';
   }
@@ -40,15 +41,7 @@ class BaseStat {
   value(character) {
     if (character._stats[this.name].baseValue != null) {
       return character._stats[this.name].baseValue
-        + character._stats[this.name].influences.reduce(
-          (total, current) => {
-            if (!current.equipmentRequired || character.hasEquiped(current.itemInstanceId)) {
-              return (total + current.value);
-            }
-            return total;
-          },
-          0,
-        );
+        + character.getStatInfluences(this.name);
     }
     throw Error(`Unset baseValue for stat ${this.name}`);
   }
